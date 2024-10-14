@@ -1,6 +1,8 @@
 'use client';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import prisma from '../../../lib/prisma';
+
 
 function PageContent() {
     const searchParams = useSearchParams();
