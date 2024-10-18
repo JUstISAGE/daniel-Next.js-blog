@@ -20,7 +20,7 @@ export default async function Page({ searchParams }: { searchParams: { username:
       return (
         <div className="h-full bg-cover bg-center bg-no-repeat text-center">
         <h1 className="font-serif text-5xl text-black text-center mt-8">
-          You haven't posted anything yet.
+          You haven&#39;t posted anything yet.
         </h1>
         <p className="font-serif text-2xl text-black text-center mt-4">
           Create your first blog.
