@@ -1,5 +1,4 @@
 'use server'
-import { Suspense } from 'react';
 import prisma from '../../../lib/prisma';
 import CreateBlog from './CreateBlog';
 import Link from "next/link";
