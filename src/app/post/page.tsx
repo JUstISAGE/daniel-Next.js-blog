@@ -74,17 +74,6 @@ export default async function Page({ searchParams }: { searchParams: { username:
   );
 }
 
-export async function createBlogPost(username: string, author: string, content: string) {
-  console.log("z")
-  await prisma.posts.create({
-    data: {
-      username: username,
-      blogtitle: author,
-      blogcontent: content,
-    },
-  });
-}
-
 
 function NoBlogs({ username }: { username: string }) {
   return (

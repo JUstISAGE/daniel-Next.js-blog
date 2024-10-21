@@ -1,7 +1,7 @@
 // /app/post/CreateBlog.tsx
 'use client'; // Ensure this is a client component
 import { useState } from 'react';
-import { createBlogPost } from './page'; // Import the server action
+import { createBlogPost } from './serversidecreateblog'; // Import the server action
 
 export default function CreateBlog({ username }: {username: string}) {
   const [author, setAuthor] = useState('');
