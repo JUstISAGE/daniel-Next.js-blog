@@ -45,7 +45,8 @@ export default function Home() {
               <label className="block mb-2 font-serif">Password:</label>
               <input type="text" id="password" name="password" className="w-full border border-gray-300 p-2 rounded mb-4" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-              <Link href={{ pathname: '/post', query: { username, password, mode: 'l' } }}>
+              <Link href={{ pathname: '/post', query: { username, password, mode: 'l' } }}
+              className="font-serif text-black hover:underline">
                Login
               </Link>
             </div>
@@ -63,7 +64,8 @@ export default function Home() {
               <label className="block mb-2 font-serif">Password:</label>
               <input type="text" id="password" name="password" className="w-full border border-gray-300 p-2 rounded mb-4" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-              <Link href={{ pathname: '/post', query: { username, password, mode: 's'} }}>
+              <Link href={{ pathname: '/post', query: { username, password, mode: 's'} }}
+              className="font-serif text-black hover:underline">
                Sign up
               </Link>
             </div>

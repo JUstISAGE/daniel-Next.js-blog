@@ -3,18 +3,15 @@ import prisma from '../../../lib/prisma';
 import CreateBlog from './CreateBlog';
 import Link from "next/link";
 
-// This is a server component.
-// `searchParams` is available from Next.js directly in the component signature.
 export default async function Page({ searchParams }: { searchParams: { username: string, password: string, mode: string } }) {
-  // Extract the username from the search params
   const { username, password, mode } = searchParams;
   
-  // Example Prisma query (modify based on your schema)
+  
   if (!prisma){
     throw new Error("Prisma fails");
   }
   const user = await prisma.posts.findMany({
-    where: { username }, // Use the actual username from searchParams
+    where: { username }, 
   });
   const bloglist:React.ReactNode[] = [];
   if(mode == 'l'){
@@ -24,11 +21,19 @@ export default async function Page({ searchParams }: { searchParams: { username:
     else{
       user.forEach(i => {
         if(i.blogcontent != ""){
-          bloglist.push(<li key={i.id} className="mb-4">
-            <h2 className="text-xl font-bold">{i.blogtitle}</h2>
-            <p>{i.blogcontent}</p>
-            <p className="text-sm text-gray-600">Posted by: {i.username}</p>
-          </li>)
+          bloglist.push(
+            <li key={i.id} className="w-full font-serif text-black mb-8">
+              <div className="mt-10 flex justify-center">
+                <div className="w-1/2 bg-white border border-gray-700 rounded-lg p-6">
+                  <h2 className="font-serif text-black mb-2 font-semibold">{i.blogtitle}</h2>
+                  <p className="font-serif text-black"><strong>By:</strong> {i.username}</p>
+                  <p className="font-serif text-black">
+                    {i.blogcontent}
+                  </p>
+                </div>
+              </div>
+            </li>
+          )
         }
       });
     }
@@ -60,7 +65,8 @@ export default async function Page({ searchParams }: { searchParams: { username:
         <p className="font-serif text-2xl text-black text-center mt-4">
           Your username has been created.
         </p>
-        <Link href={{ pathname: '/post', query: { username, password, mode: 'l'} }}>
+        <Link href={{ pathname: '/post', query: { username, password, mode: 'l'} }}
+        className="font-serif text-black hover:underline">
           Go to your homepage
         </Link>
       </div>
@@ -68,7 +74,7 @@ export default async function Page({ searchParams }: { searchParams: { username:
   }
   return (
     <div>
-      <ul>{bloglist}</ul>
+      {bloglist}
       <CreateBlog username={username} />
     </div>
   );
