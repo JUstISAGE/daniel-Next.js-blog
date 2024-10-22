@@ -37,7 +37,7 @@ export default function CreateBlog({ username }: {username: string}) {
           <div className="bg-white border border-gray-800 rounded-lg w-1/2 p-8 text-black">
             <h2 className="text-2xl font-serif mb-4 text-center">Write your blog</h2>
             <div>
-              <label className="block mb-2 font-serif">Author:</label>
+              <label className="block mb-2 font-serif">Title:</label>
               <input
                 type="text"
                 id="author"
