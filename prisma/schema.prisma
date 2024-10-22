@@ -13,4 +13,11 @@ model posts {
   username    String @db.VarChar(255)
   blogtitle   String @db.VarChar(255)
   blogcontent String
+
+}
+
+model accounts {
+  id          Int    @id @default(autoincrement())
+  username    String @db.VarChar(255) @unique
+  password    String @db.VarChar(255)
 }

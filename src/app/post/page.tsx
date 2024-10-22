@@ -10,12 +10,35 @@ export default async function Page({ searchParams }: { searchParams: { username:
   if (!prisma){
     throw new Error("Prisma fails");
   }
-  const user = await prisma.posts.findMany({
-    where: { username }, 
+  const account = await prisma.accounts.findUnique({
+    where: {username},
   });
   const bloglist:React.ReactNode[] = [];
   if(mode == 'l'){
-    if(user.length == 1){
+    if(!account){
+      return (<div className="fixed inset-0 flex justify-center items-center z-50" id="login-modal">
+      <div className="bg-white border border-gray-800 rounded-lg w-1/2 p-8 text-black">
+        <h2 className="text-2xl font-serif mb-4">Username invalid</h2>
+        <Link href={{ pathname: '/'}}>
+         Go back to login
+        </Link>
+      </div>
+    </div>)
+    }
+    if(account.password != password){
+      return (<div className="fixed inset-0 flex justify-center items-center z-50" id="login-modal">
+        <div className="bg-white border border-gray-800 rounded-lg w-1/2 p-8 text-black">
+          <h2 className="text-2xl font-serif mb-4">Password invalid</h2>
+          <Link href={{ pathname: '/'}}>
+           Go back to login
+          </Link>
+        </div>
+      </div>)
+    }
+    const user = await prisma.posts.findMany({
+      where: { username }, 
+    });
+    if(user.length == 0){
       return <NoBlogs username={username} />;
     }
     else{
@@ -39,7 +62,7 @@ export default async function Page({ searchParams }: { searchParams: { username:
     }
   }
   if(mode == 's'){
-    if(user.length != 0){
+    if(account){
       return (<div className="fixed inset-0 flex justify-center items-center z-50" id="login-modal">
         <div className="bg-white border border-gray-800 rounded-lg w-1/2 p-8 text-black">
           <h2 className="text-2xl font-serif mb-4">Username Already Registered</h2>
@@ -50,11 +73,10 @@ export default async function Page({ searchParams }: { searchParams: { username:
         </div>
       </div>)
     }
-    await prisma.posts.create({
+    await prisma.accounts.create({
       data: {
         username: username,
-        blogtitle: "",
-        blogcontent: "",
+        password: password
       },
     });
     return (
